@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Deal2G8ther</title>
+        <link href="category_css.css" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+        <!-- put your Firebase initialization code up here before all other JavaScript code -->
+
+
+
+        <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyDZWd_pP5XxKFO34iAAoUAaBUfGmtOnr30",
+                authDomain: "petsapp-65994.firebaseapp.com",
+                databaseURL: "https://petsapp-65994.firebaseio.com",
+                projectId: "petsapp-65994",
+                storageBucket: "",
+                messagingSenderId: "841919976791"
+            };
+            firebase.initializeApp(config);
+        </script>
+
+        <script src="jquery-3.3.1.min.js"></script>
+
+        <script type="text/javascript">
+
+            // jQuery convention for running when the document has been fully loaded:
+            $(document).ready(() => {
+                const database = firebase.database();
+
+                $('#resetButton').click(() => {
+                    console.log('Resetting the database');
+                    database.ref('users/').remove();
+                });
+
+                database.ref('users/').on('value', (snapshot) => {
+                    const allUsers = snapshot.val();
+                    console.log('users/ changed:', allUsers);
+                    if (allUsers) {
+                        $('#status').html('');
+                        // $('#status').append('List of user:');
+                        Object.keys(allUsers).forEach((name) => {
+                            if (allUsers[name].type == "กีฬาและการเดินทาง") {
+                                $('#status').append('<div class="column">' + '<ul class="table">'
+                                    +
+                                    "ชื่อ : " + allUsers[name].name + '<br>' +
+                                    "จำนวน : " + allUsers[name].numproduct + '<br>' +
+                                    "รายละเอียด : " + allUsers[name].detail + '<br>' +
+                                    "ข้อมูลติดต่อ : " + allUsers[name].contact + '<br>' + '</ul>' + '</div>'
+                                );
+                            }
+
+                            $(".table").css({
+                                "background-color": "white", "font-size": "100%", "width": "100%", "padding": "50px",
+                                "box-shadow": " 0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19)",
+                                "border-radius": "10px"
+                            });
+                            $(".column").css({
+                                "float": "left",
+                                "width": "33.33%",
+                                "padding": "1%",
+                                "height": "100%"
+                            });
+                        });
+                    }
+                });
+
+                $('#readButton').click(() => {
+                    const requestURL = 'users/' + $('#nameBox').val();
+                    console.log('making ajax request to:', requestURL);
+
+                    $.ajax({
+                        // all URLs are relative to http://localhost:3000/
+                        url: requestURL,
+                        type: 'GET',
+                        dataType: 'json', // this URL returns data in JSON format
+                        success: (data) => {
+                            console.log('You received some data!', data);
+
+                            if (data.job && data.pet) {
+                                $('#status').html('Successfully fetched data at URL: ' + requestURL);
+                                $('#jobDiv').html('My job is ' + data.job);
+                                $('#petImage').attr('src', data.pet).attr('width', '300px');
+                            } else {
+                                $('#status').html('Error: could not find user at URL: ' + requestURL);
+                                // clear the display
+                                $('#jobDiv').html('');
+                                $('#petImage').attr('src', '').attr('width', '0px');
+                            }
+                        },
+                    });
+                });
+
+                $('#allUsersButton').click(() => {
+                    database.ref('users/').once('value', (snapshot) => {
+                        const data = snapshot.val();
+                        console.log('You received some data', Object.keys(data));
+                        $('#status').html('All user: ' + Object.keys(data));
+                    });
+                });
+
+                $('#insertButton').click(() => {
+                    const type = $('#listbox').val();
+                    database.ref('users/' + type).set({
+                        name: $('#product').set({
+                            numproduct: $('#num-product').val(),
+                            detail: $('#detail').val(),
+                            contact: $('#contact').val(),
+                        }),
+                    });
+                });
+
+                $('#deleteButton').click(() => {
+                    const name = $('#deleteNameBox').val();
+                    database.ref('users/' + name).remove();
+                });
+
+                $(document).ajaxError(() => {
+                    $('#status').html('Error: unknown ajaxError!');
+                });
+            });
+        </script>
+        <script src="main.js"></script>
+    </head>
+
+
+    <body>
+        <div class="web_header">
+        </div>
+        <div class="allhead" style="background-color: white ; padding-bottom:1px">
+                <span style="font-size:30px;cursor:pointer;position:fixed;top:180px;" onclick="openNav()">&#9776; Type</span>
+                <div class="imgHead">
+                    <img src="logo/logo.jpg" rel="LOGO" />
+        </div>
+
+        <div>
+            <ul class="topnav">
+                <li><a href="index.html" class="Home">Home</a></li>
+                <li><a href="promotion.html" class="Promotion">Promotion</a></li>
+                <li><a href="category.html" class="Categories">Categories</a></li>
+                <li><a href="about_us.html" class="About">About Us</a></li>
+                <li><a href="post.html" class="login">Post</a></li>
+            </ul>
+        </div>
+    </div>
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="category-beauty.html">สุขภาพและความงาม</a>
+            <a href="category-baby.html">เด็กอ่อนและของเล่น</a></li>
+            <a href="category-supermarket.html">ซุปเปอร์มาร์เก็ตและสัตว์เลี้ยง</a>
+            <a href="category-home.html">บ้านและไลฟ์สไตล์</a>
+            <a href="category-men.html">แฟชั่นผู้ชาย</a>
+            <a href="category-women.html">แฟชั่นผู้หญิง</a>
+            <a href="category-sport.html">กีฬาและการเดินทาง</a>
+            <a href="category-car.html">ยานยนต์และอุปกรณ์</a>
+            <a href="category-electronic.html">อุปกรณ์อิเล็กทรอนิกส์</a>
+            <a href="category-add-electronic.html">อุปกรณ์เสริมอุปกรณ์อิเล็กทรอนิกส์</a>
+            <a href="category-tv.html">ทีวีและเครื่องใช้ไฟฟ้าในบ้าน</a>
+        </div>
+
+        <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "250px";
+            }
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+                document.getElementById("mySidenav").style.width = "0";
+            }
+        </script>
+
+        <div class="right">
+            <div id="status"></div>
+        </div>
+
+
+    </body>
+
+</html>

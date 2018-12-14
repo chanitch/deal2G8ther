@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Deal2G8ther</title>
+  <link href="post_css.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+
+  <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDZWd_pP5XxKFO34iAAoUAaBUfGmtOnr30",
+      authDomain: "petsapp-65994.firebaseapp.com",
+      databaseURL: "https://petsapp-65994.firebaseio.com",
+      projectId: "petsapp-65994",
+      storageBucket: "",
+      messagingSenderId: "841919976791"
+    };
+    firebase.initializeApp(config);
+  </script>
+
+  <script src="jquery-3.3.1.min.js"></script>
+
+  <script type="text/javascript">
+
+    // jQuery convention for running when the document has been fully loaded:
+    $(document).ready(() => {
+      const database = firebase.database();
+
+      $('#resetButton').click(() => {
+        console.log('Resetting the database');
+        database.ref('users/').remove();
+        database.ref('users/a').set({ job: 'pr', pet: 'cat.jpg' });
+      });
+
+      database.ref('users/').on('value', (snapshot) => {
+        const allUsers = snapshot.val();
+        console.log('users/ changed:', allUsers);
+        if (allUsers) {
+          $('#status').html('');
+          $('#status').append('List of user:');
+          Object.keys(allUsers).forEach((name) => {
+            $('#status').append('<li>' + name + ' ' + allUsers[name].job + ' ' + allUsers[name].pet + '</li>');
+          });
+        }
+      });
+
+      $('#readButton').click(() => {
+        const requestURL = 'users/' + $('#nameBox').val();
+        console.log('making ajax request to:', requestURL);
+
+        $.ajax({
+          url: requestURL,
+          type: 'GET',
+          dataType: 'json',
+          success: (data) => {
+            console.log('You received some data!', data);
+
+            if (data.job && data.pet) {
+              $('#status').html('Successfully fetched data at URL: ' + requestURL);
+              $('#jobDiv').html('My job is ' + data.job);
+              $('#petImage').attr('src', data.pet).attr('width', '300px');
+            } else {
+              $('#status').html('Error: could not find user at URL: ' + requestURL);
+              $('#jobDiv').html('');
+              $('#petImage').attr('src', '').attr('width', '0px');
+            }
+          },
+        });
+      });
+
+      $('#allUsersButton').click(() => {
+        database.ref('users/').once('value', (snapshot) => {
+          const data = snapshot.val();
+          console.log('You received some data', Object.keys(data));
+          $('#status').html('All user: ' + Object.keys(data));
+        });
+      });
+
+      $('#post_submit').click(() => {
+        const type = $('#listbox').val();
+        database.ref('users/').push().update({
+          name: $('#product').val(),
+          numproduct: $('#num-product').val(),
+          detail: $('#detail').val(),
+          contact: $('#contact').val(),
+          type: $('#listbox').val()
+        });
+      });
+
+
+      $('#deleteButton').click(() => {
+        const name = $('#deleteNameBox').val();
+        database.ref('users/' + name).remove();
+      });
+
+      $(document).ajaxError(() => {
+        $('#status').html('Error: unknown ajaxError!');
+      });
+    });
+  </script>
+  <script src="main.js"></script>
+</head>
+
+<body>
+
+  <div class="web_header">
+    <div class="search">
+    </div>
+  </div>
+
+  <div class="imgHead">
+    <img src="logo/logo.jpg" rel="LOGO" />
+  </div>
+
+  <div>
+    <ul class="topnav">
+      <li><a href="index.html" class="Home">Home</a></li>
+      <li><a href="promotion.html" class="Promotion">Promotion</a></li>
+      <li><a href="category.html" class="Categories">Categories</a></li>
+      <li><a href="about_us.html" class="About">About Us</a></li>
+      <li><a href="post.html" class="login">Post</a></li>
+    </ul>
+  </div>
+
+  <div class="main">
+
+    <div class="post-box">
+      <form name="box">
+        <hr>
+        <label for="product">ชื่อสินค้า :</label>
+        <input id="product" type="text" value="">
+        <br>
+        <label for="num-product">จำนวน :</label>
+        <input id="num-product" type="text" value="">
+        <label for="type">หมวดหมู่ :</label>
+        <select id="listbox">
+          <option value="สุขภาพและความงาม">สุขภาพและความงาม</option>
+          <option value="เด็กอ่อนและของเล่น">เด็กอ่อนและของเล่น</option>
+          <option value="ซุปเปอร์มาร์เก็ตและสัตว์เลี้ยง">ซุปเปอร์มาร์เก็ตและสัตว์เลี้ยง</option>
+          <option value="บ้านและไลฟ์สไตล์">บ้านและไลฟ์สไตล์</option>
+          <option value="แฟชั่นผู้ชาย">แฟชั่นผู้ชาย</option>
+          <option value="แฟชั่นผู้หญิง">แฟชั่นผู้หญิง</option>
+          <option value="กีฬาและการเดินทาง">กีฬาและการเดินทาง</option>
+          <option value="ยานยนต์และอุปกรณ์">ยานยนต์และอุปกรณ์</option>
+          <option value="อุปกรณ์อิเล็กทรอนิกส์">อุปกรณ์อิเล็กทรอนิกส์</option>
+          <option value="อุปกรณ์เสริมอุปกรณ์อิเล็กทรอนิกส์">อุปกรณ์เสริมอุปกรณ์อิเล็กทรอนิกส์</option>
+          <option value="ทีวีและเครื่องใช้ไฟฟ้าในบ้าน">ทีวีและเครื่องใช้ไฟฟ้าในบ้าน</option>
+        </select>
+        <br> <br>
+
+        <label for="detail">รายละเอียด :</label> <br>
+        <textarea id="detail" type="text" value=""></textarea>
+        <br><br>
+        <label for="contact">ช่องทางการติดต่อ :</label> <br>
+        <textarea id="contact" type="text" value=""></textarea>
+        <br>
+        <input type="button" id="post_cancle" value="ยกเลิก" onclick="window.location='post.html'">
+        <input type="button" id="post_submit" value="ตกลง" onclick="window.location='index.html'">
+
+      </form>
+    </div>
+
+  </div>
+</body>
+
+</html>

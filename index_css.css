@@ -1,0 +1,90 @@
+body {margin: 0;
+    font-family: 'Kanit', sans-serif;
+    font-size:16px;
+ }
+.imgHead img{
+    width: 300px;
+    height:120px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+ul.topnav {
+    list-style-type: none;
+    margin-left:25%;
+    padding: 0;
+    overflow: hidden;
+    background-color:rgb(255, 255, 255);
+   
+}
+ul.topnav li { float: left;
+    margin-left: auto;
+    margin-right:auto;
+    display: block;
+   
+}
+ul.topnav li a {
+  display: block;
+  color: rgb(0, 0, 0);
+  text-align: center; 
+  padding: 10px 50px 10px 56px;
+  text-decoration: none;
+  font-family: 'Kanit', sans-serif;
+}
+
+ul.topnav li.right {float: right;}
+
+ul.topnav li a.Home:hover:not(.active) {
+    background-color: rgb(235, 101, 101);
+}
+ul.topnav li a.Promotion:hover:not(.active){
+    background-color: rgb(67, 168, 226);
+}
+ul.topnav li a.Categories:hover:not(.active){
+    background-color: rgb(247, 219, 59);
+}
+ul.topnav li a.About:hover:not(.active){
+    background-color: rgb(60, 209, 85);
+}
+ul.topnav li a.login:hover:not(.active){
+    background-color: rgb(224, 149, 243);
+}
+@media screen and (max-width: 600px) {
+  ul.topnav li.right, 
+  ul.topnav li {float: none;}
+  ul.topnav li a{font-size: 14px;}
+}
+.main {
+    padding: 1%;
+    margin-top:auto;
+    font-family: 'Kanit', sans-serif;
+}
+/**************************************************************/
+.allhead{
+    background-color: white;
+    padding: 1px;
+}
+html {
+    margin: 0;
+    font-size: 100%;
+    font-family: 'Kanit', sans-serif;
+    background-image: url("logo/bg_blur.png");
+    background-size:1000px;
+    height:100%;
+    background-color:rgb(253, 139, 139);
+    
+}
+ * {
+    box-sizing: border-box;
+}
+ h1, h2, h3, h4, h5, h6, a {
+    font-family: 'Kanit', sans-serif;
+    margin: 0;
+}
+.web_header{
+    height: 45px;
+    background:#212121;
+    width: 100%;
+    display: block;
+}
+

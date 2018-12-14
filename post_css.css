@@ -1,0 +1,177 @@
+.post-box select{
+    margin-left: 20px;
+    border-radius:10px;
+    height: 40px; 
+    width: 200px;
+    border: none;
+    background-color:  rgb(231, 231, 231);
+}
+.post-box{
+    background-color: #fff;
+    width: 1000px;
+    height: 443px;
+    margin-left: auto; 
+    margin-right: auto; 
+}
+.post-box label[for=product]{
+    margin-top: 50px;
+    margin-left: 280px;
+   
+}
+.post-box label[for=num-product]{
+    margin-top: 50px;
+    margin-left: 280px;
+   
+}
+.post-box label[for=detail]{
+    margin-top: 50px;
+    margin-left: 150px;
+  
+}
+.post-box label[for=contact]{
+    margin-top: 50px;
+    margin-left: 150px;
+  
+}
+.post-box input[id=product]{
+    margin-top: 20px;
+    width: 400px;
+    height: 40px;
+   
+}
+.post-box input[id=num-product]{
+    margin-top: 20px;
+    margin-left: 13px;
+    width: 80px;
+    height: 40px;
+   
+}
+.post-box textarea[id=detail]{
+    width: 700px;
+    height: 80px;
+    margin-left: 160px;
+    margin-top: 5px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(231, 231, 231);
+ 
+}
+.post-box textarea[id=contact]{
+    width: 700px;
+    height: 80px;
+    margin-left: 160px;
+    margin-top: 5px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(231, 231, 231);
+   
+}
+.post-box input[type=text]{
+    border-radius: 10px;
+    border:none;
+    background-color: rgb(231, 231, 231);
+    
+}
+.post-box input[type=button]{
+    border: none;
+    width: 250px;
+    height: 50px;
+    
+}
+.post-box input[id=post_submit]{
+    background-color:  rgb(11, 156, 11);  
+    margin-left: 20px;
+    margin-top: 20px;
+    color: #fff;
+    font-size: 16px;
+   
+}
+.post-box input[id=post_cancle]{
+    background-color: rgb(185, 37, 37);  
+    margin-left: 250px;
+    margin-top: 20px;
+    color: #fff;
+    font-size: 16px;
+ 
+}
+
+/**************************************************************/
+body {margin: 0;
+    font-family: 'Kanit', sans-serif;
+    font-size:16px;}
+.imgHead img{
+    width: 300px;
+    height:120px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+ul.topnav {
+    list-style-type: none;
+    margin-left:25%;
+    padding: 0;
+    overflow: hidden;
+    background-color:rgb(255, 255, 255);
+}
+ul.topnav li {float: left;
+    margin-left: auto;
+    margin-right:auto;
+    display: block;
+}
+ul.topnav li a {
+  display: block;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 10px 50px 10px 56px;
+  text-decoration: none;
+  font-family: 'Kanit', sans-serif;
+}
+
+ul.topnav li.right {float: right;}
+
+ul.topnav li a.Home:hover:not(.active) {
+    background-color: rgb(235, 101, 101);
+}
+ul.topnav li a.Promotion:hover:not(.active){
+    background-color: rgb(67, 168, 226);
+}
+ul.topnav li a.Categories:hover:not(.active){
+    background-color: rgb(247, 219, 59);
+}
+ul.topnav li a.About:hover:not(.active){
+    background-color: rgb(60, 209, 85);
+}
+ul.topnav li a.login:hover:not(.active){
+    background-color: rgb(224, 149, 243);
+}
+@media screen and (max-width: 600px) {
+  ul.topnav li.right, 
+  ul.topnav li {float: none;}
+  ul.topnav li a{font-size: 14px;}
+}
+.main {
+    padding: 1%;
+    margin-top:auto;
+    height:100%;
+    font-family: 'Kanit', sans-serif;
+
+}
+/**************************************************************/
+html {
+    margin: 0;
+    font-size: 100%;
+    font-family: 'Open Sans', sans-serif; 
+}
+ * {
+    box-sizing: border-box;
+}
+ h1, h2, h3, h4, h5, h6, a {
+    font-family: 'Ubuntu', sans-serif !important;
+    margin: 0;
+}
+.web_header{
+    height: 45px;
+    background:#212121;
+    width: 100%;
+    display: block;
+}
